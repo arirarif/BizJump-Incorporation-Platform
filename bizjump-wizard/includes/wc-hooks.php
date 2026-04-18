@@ -67,6 +67,43 @@ function bjw_save_wizard_data_to_order( WC_Order $order, array $data ): void {
     WC()->session->__unset( 'bjw_wizard_data' );
 }
 
+// ── 2b. Add Internal Order Note with All Formation Data ──────────────────────
+// Fires AFTER order is saved to DB (so add_order_note works correctly)
+
+add_action( 'woocommerce_checkout_order_created', 'bjw_add_formation_order_note', 10, 1 );
+
+function bjw_add_formation_order_note( WC_Order $order ): void {
+    $entity = $order->get_meta( '_bjw_entity_type' );
+    if ( empty( $entity ) ) {
+        return; // not a BizJump order
+    }
+
+    $addons_raw = $order->get_meta( '_bjw_addons' );
+    $addons     = $addons_raw ? json_decode( $addons_raw, true ) : [];
+    $addon_list = ! empty( $addons )
+        ? implode( ', ', array_map( fn( $k ) => ucwords( str_replace( '_', ' ', $k ) ), $addons ) )
+        : 'None';
+
+    $entity_label = strtoupper( str_replace( '_', '-', $entity ) );
+    $plan_label   = ucfirst( str_replace( 'plan_', '', $order->get_meta( '_bjw_plan' ) ) );
+    $state_label  = strtoupper( $order->get_meta( '_bjw_state' ) );
+
+    $note  = "=== BizJump Formation Details ===\n";
+    $note .= "Entity Type:      {$entity_label}\n";
+    $note .= "State:            {$state_label}\n";
+    $note .= "Plan:             {$plan_label}\n";
+    $note .= "Add-Ons:          {$addon_list}\n";
+    $note .= "Business Name:    " . $order->get_meta( '_bjw_business_name' ) . ' ' . $order->get_meta( '_bjw_designator' ) . "\n";
+    $note .= "Business Address: " . $order->get_meta( '_bjw_business_address' ) . "\n";
+    $note .= "Contact Person:   " . $order->get_meta( '_bjw_contact_person' ) . "\n";
+    $note .= "Contact Email:    " . $order->get_meta( '_bjw_contact_email' ) . "\n";
+    $note .= "Contact Phone:    " . $order->get_meta( '_bjw_contact_phone' ) . "\n";
+    $note .= "SMS Consent:      " . ( $order->get_meta( '_bjw_sms_consent' ) === 'yes' ? 'Yes' : 'No' );
+
+    // Internal note — not sent to customer, visible only in admin order screen
+    $order->add_order_note( $note, 0, false );
+}
+
 // ── 3. Admin — Display Wizard Data in Order Screen ───────────────────────────
 
 add_action( 'woocommerce_admin_order_data_after_billing_address', 'bjw_display_wizard_data_in_admin', 10, 1 );
