@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BizJump — Start Your Business Today</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue:     #1e3a8a;
+    --blue-mid: #2563eb;
+    --blue-lt:  #eff6ff;
+    --orange:   #f97316;
+    --orange-dk:#ea6c00;
+    --gray-50:  #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --white:    #ffffff;
+    --radius:   8px;
+    --shadow:   0 2px 12px rgba(0,0,0,.08);
+    --shadow-md:0 4px 24px rgba(0,0,0,.12);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--gray-900); background: var(--white); font-size: 16px; line-height: 1.6; }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .ann-bar {
+    background: var(--blue);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .ann-bar a { color: var(--orange); text-decoration: none; font-weight: 600; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    box-shadow: 0 1px 8px rgba(0,0,0,.06);
+  }
+  .nav-logo { font-size: 22px; font-weight: 800; color: var(--blue); letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--gray-700); font-size: 15px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta {
+    background: var(--orange); color: #fff;
+    border: none; border-radius: var(--radius);
+    padding: 10px 22px; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: background .2s, transform .15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--orange-dk); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0f2156 0%, #1e3a8a 50%, #1d4ed8 100%);
+    color: #fff;
+    padding: 80px 32px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner { position: relative; max-width: 780px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    font-size: 13px; font-weight: 600;
+    padding: 6px 16px; border-radius: 100px;
+    margin-bottom: 24px; letter-spacing: .4px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: #fbbf24; }
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,.82);
+    max-width: 560px; margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+  .btn-primary {
+    background: var(--orange); color: #fff;
+    padding: 16px 36px; border-radius: var(--radius);
+    font-size: 17px; font-weight: 700;
+    text-decoration: none; display: inline-block;
+    transition: background .2s, transform .15s;
+    box-shadow: 0 4px 20px rgba(249,115,22,.4);
+  }
+  .btn-primary:hover { background: var(--orange-dk); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.4);
+    color: #fff; padding: 16px 36px;
+    border-radius: var(--radius); font-size: 17px; font-weight: 600;
+    text-decoration: none; display: inline-block;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .hero-trust {
+    display: flex; gap: 32px; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; color: rgba(255,255,255,.75); font-weight: 500;
+  }
+  .trust-item svg { width: 18px; height: 18px; fill: #4ade80; flex-shrink: 0; }
+
+  /* ── STATS ── */
+  .stats {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 48px 32px;
+  }
+  .stats-grid {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px; text-align: center;
+  }
+  .stat-num { font-size: 36px; font-weight: 800; color: var(--blue); line-height: 1; }
+  .stat-label { font-size: 14px; color: var(--gray-500); margin-top: 6px; font-weight: 500; }
+
+  /* ── SECTION WRAPPER ── */
+  .section { padding: 80px 32px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 13px; font-weight: 700; color: var(--blue-mid);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 800; color: var(--gray-900);
+    line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .section-sub { font-size: 17px; color: var(--gray-500); max-width: 560px; line-height: 1.7; }
+
+  /* ── HOW IT WORKS ── */
+  .hiw { background: var(--gray-50); }
+  .hiw-header { text-align: center; margin-bottom: 56px; }
+  .hiw-header .section-sub { margin: 0 auto; }
+  .hiw-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px; position: relative;
+  }
+  .hiw-steps::before {
+    content: '';
+    position: absolute; top: 40px; left: calc(16.6% + 24px); right: calc(16.6% + 24px);
+    height: 2px; background: var(--gray-300);
+  }
+  .step-card { text-align: center; }
+  .step-num {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--blue); color: #fff;
+    font-size: 28px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 20px rgba(30,58,138,.25);
+  }
+  .step-card h3 { font-size: 18px; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
+  .step-card p { font-size: 15px; color: var(--gray-500); line-height: 1.6; }
+
+  /* ── PRICING ── */
+  .pricing-header { text-align: center; margin-bottom: 48px; }
+  .pricing-header .section-sub { margin: 0 auto; }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .plan-card {
+    border: 1px solid var(--gray-300);
+    border-radius: 12px;
+    padding: 32px 24px;
+    position: relative;
+    transition: box-shadow .25s, transform .25s;
+    background: var(--white);
+  }
+  .plan-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+  .plan-card.featured {
+    border: 2px solid var(--blue-mid);
+    box-shadow: var(--shadow-md);
+  }
+  .featured-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--blue-mid); color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 4px 16px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .plan-name { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-500); margin-bottom: 8px; }
+  .plan-price { font-size: 36px; font-weight: 800; color: var(--gray-900); line-height: 1; }
+  .plan-price span { font-size: 16px; font-weight: 500; color: var(--gray-500); }
+  .plan-desc { font-size: 14px; color: var(--gray-500); margin: 12px 0 24px; line-height: 1.5; }
+  .plan-features { list-style: none; margin-bottom: 28px; }
+  .plan-features li {
+    font-size: 14px; color: var(--gray-700);
+    padding: 7px 0; border-bottom: 1px solid var(--gray-100);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .plan-features li::before { content: '✓'; color: #16a34a; font-weight: 700; flex-shrink: 0; }
+  .plan-btn {
+    display: block; text-align: center;
+    padding: 13px; border-radius: var(--radius);
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: all .2s; cursor: pointer;
+    border: none; width: 100%;
+  }
+  .plan-btn-outline { background: transparent; border: 2px solid var(--blue); color: var(--blue); }
+  .plan-btn-outline:hover { background: var(--blue); color: #fff; }
+  .plan-btn-solid { background: var(--blue-mid); color: #fff; }
+  .plan-btn-solid:hover { background: var(--blue); }
+
+  /* ── WHY BIZJUMP ── */
+  .why { background: var(--blue-lt); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+  }
+  .why-features { display: flex; flex-direction: column; gap: 28px; }
+  .feature-item { display: flex; gap: 20px; align-items: flex-start; }
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: var(--blue); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 22px;
+  }
+  .feature-item h4 { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+  .feature-item p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+  .why-visual {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: var(--shadow-md);
+  }
+  .why-visual h3 { font-size: 18px; font-weight: 700; color: var(--gray-900); margin-bottom: 20px; }
+  .compare-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--gray-100);
+    font-size: 14px;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-label { color: var(--gray-700); font-weight: 500; }
+  .compare-yes { color: #16a34a; font-weight: 700; }
+  .compare-no { color: #ef4444; font-weight: 700; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, #0f2156, #1e3a8a);
+    color: #fff; text-align: center;
+    padding: 80px 32px;
+  }
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800; margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cta-section p { font-size: 18px; color: rgba(255,255,255,.75); margin-bottom: 36px; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray-900);
+    color: rgba(255,255,255,.7);
+    padding: 56px 32px 32px;
+  }
+  .footer-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-brand .nav-logo { color: #fff; font-size: 20px; display: block; margin-bottom: 14px; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; }
+  .footer-col h4 { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,.6); text-decoration: none; font-size: 14px; transition: color .2s; }
+  .footer-col ul li a:hover { color: #fff; }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    font-size: 13px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    .nav-links, .nav-cta { display: none; }
+    .hero { padding: 56px 16px 48px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .hiw-steps { grid-template-columns: 1fr; }
+    .hiw-steps::before { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .section { padding: 56px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="ann-bar">
+  🎉 Limited Time: Free Registered Agent for 1 Year — <a href="#">Start Now →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Biz<span>Jump</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">How It Works</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Start Your Business →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🇺🇸 All 50 States · Fast &amp; Affordable</div>
+    <h1>Launch Your Business<br>in <span>Minutes</span>, Not Months</h1>
+    <p>BizJump handles your LLC, Corporation, or Non-Profit formation — fast, simple, and 100% online. Flat-rate pricing. No surprises.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">Start For Free →</a>
+      <a href="#" class="btn-outline">See Pricing</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg>
+        No hidden fees
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg>
+        SSL Secured Checkout
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg>
+        100% Money-Back Guarantee
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg>
+        All 50 States
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-num" data-target="15000">15,000+</div>
+      <div class="stat-label">Businesses Formed</div>
+    </div>
+    <div>
+      <div class="stat-num">50</div>
+      <div class="stat-label">States Supported</div>
+    </div>
+    <div>
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Average Rating</div>
+    </div>
+    <div>
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Hidden Fees</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section hiw">
+  <div class="section-inner">
+    <div class="hiw-header">
+      <div class="section-label">Simple Process</div>
+      <h2 class="section-title">Form Your Business in 3 Easy Steps</h2>
+      <p class="section-sub">No lawyers, no paperwork confusion. Our guided wizard walks you through everything.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Choose Your Business</h3>
+        <p>Select your entity type — LLC, C-Corp, S-Corp, or Non-Profit — and the state you want to form in.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Pick a Plan &amp; Add-Ons</h3>
+        <p>Choose from our 4 service tiers. Add optional services like Registered Agent or EIN filing.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>We File — You Launch</h3>
+        <p>We handle all the state paperwork. You get your formation documents and start doing business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="pricing-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, Flat-Rate Pricing</h2>
+      <p class="section-sub">No hourly rates. No surprises. State filing fees are always shown separately and clearly.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Basic -->
+      <div class="plan-card">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">$49 <span>+ state fee</span></div>
+        <div class="plan-desc">Get your business formed — everything you need to get started.</div>
+        <ul class="plan-features">
+          <li>Articles of Formation Filed</li>
+          <li>Name Availability Check</li>
+          <li>Digital Delivery</li>
+          <li>Processing: 7–10 days</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline">Get Started</button>
+      </div>
+
+      <!-- Pro -->
+      <div class="plan-card">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$149 <span>+ state fee</span></div>
+        <div class="plan-desc">The most popular choice — includes essential compliance tools.</div>
+        <ul class="plan-features">
+          <li>Everything in Basic</li>
+          <li>EIN / Tax ID Filing</li>
+          <li>Operating Agreement</li>
+          <li>Processing: 5–7 days</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline">Get Started</button>
+      </div>
+
+      <!-- Premium -->
+      <div class="plan-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">$249 <span>+ state fee</span></div>
+        <div class="plan-desc">Complete package with Registered Agent and compliance monitoring.</div>
+        <ul class="plan-features">
+          <li>Everything in Pro</li>
+          <li>1 Year Registered Agent</li>
+          <li>Compliance Alerts</li>
+          <li>Processing: 3–5 days</li>
+        </ul>
+        <button class="plan-btn plan-btn-solid">Get Started</button>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">$449 <span>+ state fee</span></div>
+        <div class="plan-desc">Priority processing and full-service support for serious founders.</div>
+        <ul class="plan-features">
+          <li>Everything in Premium</li>
+          <li>Priority Processing</li>
+          <li>Dedicated Account Manager</li>
+          <li>Processing: 1–2 days</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline">Get Started</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY BIZJUMP -->
+<section class="section why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Why BizJump</div>
+        <h2 class="section-title">Built for Entrepreneurs,<br>Not Lawyers</h2>
+        <p class="section-sub" style="margin-bottom: 40px;">We stripped away the complexity and built a system that just works.</p>
+        <div class="why-features">
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <div>
+              <h4>Fast Formation</h4>
+              <p>Most orders are filed within 1–2 business days. No waiting weeks for paperwork.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💰</div>
+            <div>
+              <h4>Transparent Pricing</h4>
+              <p>State fees are always shown clearly. No upsells at checkout, no surprise invoices.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div>
+              <h4>100% Money-Back Guarantee</h4>
+              <p>If we make an error in your filing, we fix it for free or refund you completely.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <h3>BizJump vs. Traditional Lawyers</h3>
+        <div class="compare-row">
+          <span class="compare-label">Price</span>
+          <span><b style="color:#1e3a8a">From $49</b> &nbsp;vs&nbsp; <span style="color:#6b7280">$1,000–$3,000</span></span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">Speed</span>
+          <span><b style="color:#1e3a8a">Days</b> &nbsp;vs&nbsp; <span style="color:#6b7280">Weeks</span></span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">100% Online</span>
+          <span class="compare-yes">✓ Yes</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">All 50 States</span>
+          <span class="compare-yes">✓ Yes</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">Money-Back Guarantee</span>
+          <span class="compare-yes">✓ Yes</span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">No Hidden Fees</span>
+          <span class="compare-yes">✓ Yes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Start Your Business?</h2>
+  <p>Join 15,000+ entrepreneurs who launched with BizJump. It takes less than 10 minutes.</p>
+  <div class="cta-btns">
+    <a href="#" class="btn-primary">Start Your Business →</a>
+    <a href="#" class="btn-outline">View Pricing</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">Biz<span style="color:#f97316">Jump</span></span>
+      <p>BizJump helps entrepreneurs form their business online — fast, affordable, and stress-free. All 50 states supported.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">LLC Formation</a></li>
+        <li><a href="#">Corporation</a></li>
+        <li><a href="#">S-Corporation</a></li>
+        <li><a href="#">Non-Profit</a></li>
+        <li><a href="#">Registered Agent</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 BizJump. All rights reserved.</span>
+    <span>BizJump is not a law firm and does not provide legal advice.</span>
+  </div>
+</footer>
+
+</body>
+</html>
