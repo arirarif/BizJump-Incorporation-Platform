@@ -25,6 +25,7 @@ require_once BJW_DIR . 'includes/data-addons.php';
 require_once BJW_DIR . 'includes/ajax-handlers.php';
 require_once BJW_DIR . 'includes/wc-hooks.php';
 require_once BJW_DIR . 'includes/shortcode.php';
+require_once BJW_DIR . 'includes/admin-page.php';   // WP Admin docs & product manager
 
 // ── Register shortcode ───────────────────────────────────────────────────────
 add_shortcode( 'bizjump_wizard', 'bjw_render_wizard' );
