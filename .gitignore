@@ -1,0 +1,24 @@
+# Archives — never commit
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.tgz
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Dependencies
+node_modules/
+vendor/
+
+# Logs
+*.log

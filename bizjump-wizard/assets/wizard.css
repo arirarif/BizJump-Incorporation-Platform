@@ -101,9 +101,28 @@
 /* ── Layout ─────────────────────────────────────────────────── */
 .bj-wizard-layout {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr; /* sidebar hidden by default — full-width steps */
     gap: 32px;
     align-items: start;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Order-summary sidebar is hidden globally for now (client request).
+   To re-enable: delete the .bj-sidebar rule below AND restore
+   grid-template-columns to "1fr 300px" + remove max-width/margin above. */
+.bj-sidebar {
+    display: none !important;
+}
+
+/* When shortcode explicitly opts back in to the sidebar, this still works */
+.bj-wizard-layout.bj-with-sidebar {
+    grid-template-columns: 1fr 300px;
+    max-width: none;
+}
+.bj-wizard-layout.bj-with-sidebar .bj-sidebar {
+    display: block !important;
 }
 
 .bj-steps-container {

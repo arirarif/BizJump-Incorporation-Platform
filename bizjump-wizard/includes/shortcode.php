@@ -5,14 +5,23 @@
  * Outputs the full 6-step wizard HTML.
  * All steps are in the DOM; JS controls which step is visible.
  *
- * Usage: [bizjump_wizard]
+ * Usage:
+ *   [bizjump_wizard]                — full layout with sticky order-summary sidebar (default)
+ *   [bizjump_wizard sidebar="off"]  — hide sidebar, steps go full-width
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function bjw_render_wizard(): string {
+function bjw_render_wizard( $atts = [] ): string {
+    $atts = shortcode_atts( [
+        'sidebar' => 'on',
+    ], $atts, 'bizjump_wizard' );
+
+    $hide_sidebar  = in_array( strtolower( (string) $atts['sidebar'] ), [ 'off', 'no', 'hide', 'false', '0' ], true );
+    $layout_class  = 'bj-wizard-layout' . ( $hide_sidebar ? ' bj-no-sidebar' : '' );
+
     ob_start();
     ?>
     <div id="bj-wizard" class="bj-wizard-wrap" role="main">
@@ -41,7 +50,7 @@ function bjw_render_wizard(): string {
         </div>
 
         <!-- ── Wizard Layout ─────────────────────────────────────────────── -->
-        <div class="bj-wizard-layout">
+        <div class="<?php echo esc_attr( $layout_class ); ?>">
 
             <!-- Steps container -->
             <div class="bj-steps-container">
@@ -324,6 +333,7 @@ function bjw_render_wizard(): string {
             </div><!-- /.bj-steps-container -->
 
             <!-- ── Sticky Order Summary Sidebar ──────────────────────── -->
+            <?php if ( ! $hide_sidebar ) : ?>
             <aside class="bj-sidebar" id="bj-sidebar" aria-label="Order summary">
                 <div class="bj-sidebar-inner">
                     <h3 class="bj-sidebar-title">Your Order</h3>
@@ -364,6 +374,7 @@ function bjw_render_wizard(): string {
                     </div>
                 </div>
             </aside>
+            <?php endif; ?>
 
         </div><!-- /.bj-wizard-layout -->
     </div><!-- /#bj-wizard -->

@@ -57,6 +57,9 @@
 
     /* ── Sidebar updater ────────────────────────────────────── */
     function updateSidebar() {
+        // Bail early if the sidebar isn't rendered (shortcode sidebar="off")
+        if ( ! document.getElementById( 'bj-sidebar' ) ) return;
+
         const planData = BJW.plans.find( p => p.key === state.plan );
 
         $( '#bj-sum-entity' ).textContent = state.entity
@@ -487,8 +490,32 @@
         }
     } );
 
+    /* ── URL Param Pre-Selection ────────────────────────────────
+       Lets external pages (e.g. Elementor entity-cards widget) deep-link to
+       a pre-selected entity by appending ?entity=llc|c_corp|s_corp|non_profit
+       Optional second param: ?step=2 to also auto-advance past Step 1.
+    ──────────────────────────────────────────────────────────── */
+    function applyUrlParams() {
+        const params = new URLSearchParams( window.location.search );
+        const ent    = params.get( 'entity' );
+        const valid  = [ 'llc', 'c_corp', 's_corp', 'non_profit' ];
+
+        if ( ent && valid.includes( ent ) ) {
+            const card = wizard.querySelector( '.bj-entity-card[data-entity="' + ent + '"]' );
+            if ( card ) {
+                card.click(); // triggers existing selection logic
+                // Auto-advance to step 2 unless explicitly told to stay
+                const stayOnStep1 = params.get( 'step' ) === '1';
+                if ( ! stayOnStep1 ) {
+                    setTimeout( () => showStep( 2 ), 80 );
+                }
+            }
+        }
+    }
+
     /* ── Init ───────────────────────────────────────────────── */
     showStep( 1 );
     updateSidebar();
+    applyUrlParams();
 
 } )();

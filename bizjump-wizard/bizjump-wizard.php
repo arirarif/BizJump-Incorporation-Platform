@@ -3,7 +3,7 @@
  * Plugin Name:     BizJump Wizard
  * Plugin URI:      https://bizjump.com
  * Description:     Multi-step incorporation wizard that integrates with WooCommerce for order creation, payment, and tracking.
- * Version:         1.0.0
+ * Version:         1.3.0
  * Author:          BizJump Dev
  * Text Domain:     bizjump-wizard
  * Requires at least: 6.0
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'BJW_VERSION',  '1.0.0' );
+define( 'BJW_VERSION',  '1.3.0' );
 define( 'BJW_DIR',      plugin_dir_path( __FILE__ ) );
 define( 'BJW_URL',      plugin_dir_url( __FILE__ ) );
 
